@@ -9,7 +9,7 @@ const CARD_PASSWORD = process.env.CARD_PASSWORD;
 // Coordenadas (opcionales)
 const json_coordenadas = fs.readFileSync('./assets/coordenadas.json');
 const coordenadas = JSON.parse(json_coordenadas);
-const CONTROL_NUMBER = '58652066'
+const CONTROL_NUMBER = process.env.CONTROL_NUMBER;
 //obtener bancos del json ubicado en assets/bancos.json
 const json_bancos = fs.readFileSync('./assets/banks.json');
 const BANKS = JSON.parse(json_bancos);
