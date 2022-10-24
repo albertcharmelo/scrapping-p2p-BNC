@@ -48,7 +48,7 @@ bot.on('text', async (ctx) => {
   ctx.reply('Realizando pago movil..')
   await MakeP2P(data_pago);
   await bot.telegram.sendPhoto(ctx.chat.id, {
-    source: `./screenshots/${data_pago.id_transaccion}.png`
+    source: `./screenshots/PayTo${data_pago.id_transaccion}.png`
   });
 
   ctx.reply(`Pago realizado con exito el id de capture es ${data_pago.id_transaccion}`);

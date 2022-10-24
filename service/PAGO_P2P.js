@@ -93,6 +93,8 @@ async function P2P(data_p2p , control_number,page ){
   await page.goto('https://personas.bncenlinea.com/Payments/P2P/Emission'); // Entrar al P2P
   
   await page.waitForTimeout(3000);
+  let option_banco =  await seleccionarBanco(data_p2p.bank.code).then((res) => res);
+  let option_codArea = await seleccionarCodigoArea(data_p2p.phone.code).then((res) => res);
 
   await page.evaluate( async (data_p2p) => {
     console.log(data_p2p.option_banco,data_p2p.opcion_codArea)
@@ -106,7 +108,7 @@ async function P2P(data_p2p , control_number,page ){
     document.getElementById(data_p2p.opcion_codArea).click() // Seleccion del numero de operadora ej 0424
     document.getElementById('prv_Beneficiary_PhoneNumber').value = data_p2p.data.phone.number // 7 digitos del numero de telefono
     document.getElementById('BtnContinue').click() // Continuar
-  },{data:data_p2p, option_banco: seleccionarBanco(data_p2p.bank.code), opcion_codArea: seleccionarCodigoArea(data_p2p.phone.code)});
+  },{data:data_p2p, option_banco: option_banco, opcion_codArea:option_codArea });
 
 
   await page.waitForTimeout(3000);
@@ -154,7 +156,7 @@ function buscar_banco(banco){
 }
 
 
- function seleccionarBanco(code){
+ async function seleccionarBanco(code){
   switch (code) {
     case '0102':
       return 'bs-select-3-23'
@@ -192,7 +194,7 @@ function buscar_banco(banco){
   }
 }
 
- function seleccionarCodigoArea(code){
+ async function seleccionarCodigoArea(code){
   switch (code) {
     case '0412':
       return 'bs-select-4-0'
